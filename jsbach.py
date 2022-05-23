@@ -16,7 +16,7 @@ class JSBachExceptions(Exception):
         i = 1
         msg = msgs[0]
         for param in params:
-            msg = msg + str(param) + " " + msgs[i] +  " "
+            msg = msg + str(param) + " " + msgs[i] + " "
             i = i + 1
         super().__init__(msg)
 
@@ -256,7 +256,7 @@ class EvalVisitor(jsbachVisitor):
                 return self.variables['__GLOBAL_VARIABLES__'][l[0].getText()]
             except:
                 raise JSBachExceptions(
-                    ["Undefined variable ","."],
+                    ["Undefined variable ", "."],
                     [l[0].getText()]
                 )
 
@@ -349,7 +349,7 @@ class EvalVisitor(jsbachVisitor):
         method_name = l[0].getText()
         if method_name in self.methods.keys():
             raise JSBachExceptions(
-                ["Method ","already defined."],
+                ["Method ", "already defined."],
                 [method_name]
             )
             return None
@@ -365,7 +365,7 @@ class EvalVisitor(jsbachVisitor):
         for arg in args:
             if arg in self.variables[method_name].keys():
                 raise JSBachExceptions(
-                    ["Parameter name ","repeated."],
+                    ["Parameter name ", "repeated."],
                     [arg]
                 )
             self.variables[method_name][arg] = None
@@ -385,7 +385,7 @@ class EvalVisitor(jsbachVisitor):
             return None
         if len(l)-1 != len(self.arguments[l[0].getText()]):
             raise JSBachExceptions(
-                ["Number of parameters invalid on ", "call, were given", "needed","."],
+                ["Number of parameters invalid on ", "call, were given", "needed", "."],
                 [l[0].getText(), len(l)-1, len(self.arguments[l[0].getText()])]
             )
             return None
@@ -511,6 +511,6 @@ else:
     evaluator.setInitialMethod('Main', [])
 
 evaluator.visit(tree)
-print("\nProgram ended, press any key to generate the music...",end="")
+print("\nProgram ended, press any key to generate the music...", end="")
 input()
 generateMusic()
